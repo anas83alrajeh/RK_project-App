@@ -1,4 +1,3 @@
-# 1_🧮_حساب_التكاليف.py content
 import streamlit as st
 import pandas as pd
 import os
@@ -9,6 +8,11 @@ st.markdown("<h2 dir='rtl' style='text-align:right;'>🧮 حساب التكال�
 
 DATA_FILE = "data/tasks.xlsx"
 os.makedirs("data", exist_ok=True)
+
+# 🔧 تحقق من وجود الملف وقم بإنشائه إن لم يكن موجودًا
+if not os.path.exists(DATA_FILE):
+    df_empty = pd.DataFrame(columns=["اسم المهمة", "العدد", "سعر الوحدة", "التكلفة"])
+    df_empty.to_excel(DATA_FILE, index=False, engine='openpyxl')
 
 @st.cache_data
 def load_tasks():
